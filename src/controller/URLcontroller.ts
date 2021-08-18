@@ -25,7 +25,7 @@ export class URLcontroller {
 
         // ver se url foi enviada
         if(!originalURL) {
-            res.end('enviar url please')
+            res.end('URL Not found')
             return
         }
 
@@ -33,7 +33,7 @@ export class URLcontroller {
         // ver se ja existe url curta no db
         dataStorage.findOne({'originalURL': originalURL}, (err: any , urlData: null)=>{
             if(err) {
-                return console.log('deu ruim');
+                return console.log('error');
             }
 
             // caso nao. add ao db
@@ -49,7 +49,7 @@ export class URLcontroller {
                 
 
                 // retornar url
-                res.json({originalURL , hashCode , shortURL});
+                res.json({shortURL});
 
                 //salvar hash no db
                 dataStorage.insert({originalURL , hashCode , shortURL});
@@ -57,7 +57,7 @@ export class URLcontroller {
             } else { // caso sim. ler dados do db
                 dataStorage.findOne({'originalURL': originalURL}, (err: any , urlData:UrlDataType)=>{
                     if(err) {
-                        return console.log('deu ruim');
+                        return console.log('error');
                     }
                     // retornar url
                     res.json(urlData.shortURL);
@@ -78,13 +78,12 @@ export class URLcontroller {
 
         dataStorage.findOne({'hashCode': hash}, (err: any , urlData: UrlDataType )=>{
             if(err) {
-                return console.log('deu ruim');
+                return console.log('error');
             }
 
             if(urlData == null) {
             
-                // retornar url
-                console.log('url nao existe no db')
+                console.log('URL not found')
             } else {
                 res.redirect(urlData.originalURL);
             }

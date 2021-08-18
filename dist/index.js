@@ -19,7 +19,7 @@ api.get('/test', (req, res) => {
     res.end('<h1> my test API<h1/>');
 });
 const urlcontroller = new URLcontroller_1.URLcontroller;
-api.post('/test-short', urlcontroller.shorten);
+api.post('/shorten', urlcontroller.shorten);
 api.get('/:hash', urlcontroller.redirect);
 api.listen(3000, () => {
     console.log('server listen');

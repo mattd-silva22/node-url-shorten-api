@@ -24,7 +24,7 @@ api.get('/test' , (req:Request ,res:Response)=>{
 
 const urlcontroller = new URLcontroller
 
-api.post('/test-short' , urlcontroller.shorten );
+api.post('/shorten' , urlcontroller.shorten );
 
 
 api.get('/:hash' , urlcontroller.redirect);

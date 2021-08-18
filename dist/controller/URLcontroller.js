@@ -26,13 +26,13 @@ class URLcontroller {
             const { originalURL } = req.body;
             // ver se url foi enviada
             if (!originalURL) {
-                res.end('enviar url please');
+                res.end('URL Not found');
                 return;
             }
             // ver se ja existe url curta no db
             dataStorage.findOne({ 'originalURL': originalURL }, (err, urlData) => {
                 if (err) {
-                    return console.log('deu ruim');
+                    return console.log('error');
                 }
                 // caso nao. add ao db
                 if (urlData == null) {
@@ -40,14 +40,14 @@ class URLcontroller {
                     const hashCode = nanoid_1.nanoid(8);
                     const shortURL = `${Consts_1.config.API_URL}/${hashCode}`;
                     // retornar url
-                    res.json({ originalURL, hashCode, shortURL });
+                    res.json({ shortURL });
                     //salvar hash no db
                     dataStorage.insert({ originalURL, hashCode, shortURL });
                 }
                 else { // caso sim. ler dados do db
                     dataStorage.findOne({ 'originalURL': originalURL }, (err, urlData) => {
                         if (err) {
-                            return console.log('deu ruim');
+                            return console.log('error');
                         }
                         // retornar url
                         res.json(urlData.shortURL);
@@ -62,11 +62,10 @@ class URLcontroller {
             const { hash } = req.params; // wwww.youtube.com/h1f847198
             dataStorage.findOne({ 'hashCode': hash }, (err, urlData) => {
                 if (err) {
-                    return console.log('deu ruim');
+                    return console.log('error');
                 }
                 if (urlData == null) {
-                    // retornar url
-                    console.log('url nao existe no db');
+                    console.log('URL not found');
                 }
                 else {
                     res.redirect(urlData.originalURL);
