@@ -4,7 +4,7 @@
   "description": "url shortener",
   "main": "index.js",
   "scripts": {
-    "build:watch": "tsc -w",
+    "build-w": "tsc -w",
     "dev": "nodemon ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

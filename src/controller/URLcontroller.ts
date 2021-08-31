@@ -4,7 +4,7 @@ import { config } from './Consts';
 import nedb from 'nedb'
 
 const dataStorage = new nedb({
-    filename: './src/database/urlStorage.db',
+    filename: './database/urlStorage.db',
     autoload: true
 });
 

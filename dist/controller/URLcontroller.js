@@ -17,7 +17,7 @@ const nanoid_1 = require("nanoid");
 const Consts_1 = require("./Consts");
 const nedb_1 = __importDefault(require("nedb"));
 const dataStorage = new nedb_1.default({
-    filename: './src/database/urlStorage.db',
+    filename: './database/urlStorage.db',
     autoload: true
 });
 class URLcontroller {
